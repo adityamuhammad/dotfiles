@@ -1,0 +1,119 @@
+set nocompatible
+set noerrorbells visualbell t_vb=
+set tabstop=2
+set softtabstop=2
+set expandtab
+set shiftwidth=2
+
+set list listchars=tab:»•,trail:•
+set nocursorline
+set title
+
+imap jj <Esc>
+cmap jj <c-c>
+vmap v <Esc>
+
+let g:mapleader=","
+
+nnoremap <leader><leader> <c-^>
+
+set autowrite
+set number
+set splitright
+set splitbelow
+
+set pastetoggle=<F2>
+set clipboard=unnamed
+
+"-------------Auto-Commands--------------"
+"Automatically source the Vimrc file on save.
+augroup autosourcing
+	autocmd!
+	autocmd BufWritePost .vimrc source %
+augroup END
+
+"search
+nnoremap / /\v
+vnoremap / /\v
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+map <CR> :nohl<CR>
+
+"remapping switch windows
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+
+"set undo directory backups
+set undofile
+set undodir=~/.config/vim/undodir
+
+"Plug Plugins manager
+call plug#begin('~/.config/vim/plugged')
+Plug 'sheerun/vim-polyglot'
+Plug 'scrooloose/nerdtree'
+Plug 'qpkorr/vim-bufkill'
+Plug 'tpope/vim-surround'
+Plug 'mattn/emmet-vim'
+Plug 'rking/ag.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'bling/vim-bufferline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'ervandew/supertab'
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
+call plug#end()
+
+"syntax and background , and colorscheme
+set background=dark
+set t_Co=256
+syntax on
+colorscheme atom-dark-256
+set termguicolors     " enable true colors support
+
+if exists('$TMUX')
+  " Colors in tmux
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
+
+"fzf remapping
+map <leader>f :Files<CR>
+map <C-P> :GFiles<CR>
+map <C-B> :Buffers<CR>
+
+filetype plugin indent on
+
+"set 4 tab for php file
+"autocmd Filetype php setlocal shiftwidth=4 tabstop=4
+
+"Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts=1
+let g:Powerline_symbols='unicode'
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline_theme='deus'
+set noshowmode
+
+"nerdtree
+map <C-n> :NERDTreeToggle<cr>
+nnoremap <C-t> :call NumberToggle()<cr>
+
+" emmet settings
+let g:user_emmet_settings = {
+  \    'indentation' : '  '
+  \}
+"imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
+"git gutter
+let g:gitgutter_override_sign_column_highlight = 0
+set updatetime=100
