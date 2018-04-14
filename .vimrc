@@ -1,3 +1,4 @@
+"for neovim
 set guicursor=
 "set nocompatible
 set noerrorbells visualbell t_vb=
