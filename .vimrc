@@ -1,4 +1,5 @@
-set nocompatible
+set guicursor=
+"set nocompatible
 set noerrorbells visualbell t_vb=
 set tabstop=2
 set softtabstop=2
@@ -7,7 +8,6 @@ set shiftwidth=2
 
 set list listchars=tab:»•,trail:•
 set nocursorline
-set title
 
 imap jj <Esc>
 cmap jj <c-c>
@@ -23,7 +23,6 @@ set splitright
 set splitbelow
 
 set pastetoggle=<F2>
-set clipboard=unnamed
 
 "-------------Auto-Commands--------------"
 "Automatically source the Vimrc file on save.
@@ -32,16 +31,13 @@ augroup autosourcing
 	autocmd BufWritePost .vimrc source %
 augroup END
 
-"search
-nnoremap / /\v
-vnoremap / /\v
 set hlsearch
 set incsearch
 set ignorecase
 set smartcase
 map <CR> :nohl<CR>
 
-"remapping switch windows
+"mapping switch windows
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -86,7 +82,7 @@ if exists('$TMUX')
 endif
 
 
-"fzf remapping
+"fzf mapping
 map <leader>f :Files<CR>
 map <C-P> :GFiles<CR>
 map <C-B> :Buffers<CR>
