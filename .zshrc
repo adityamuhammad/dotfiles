@@ -94,7 +94,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias projects="cd ~/Documents/Projects/"
+alias prj = "cd ~/Documents/Projects/"
 #tmux 
 
 #PowerLevel9K settings
