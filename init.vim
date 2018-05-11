@@ -21,6 +21,14 @@ set number
 set splitright
 set splitbelow
 set pastetoggle=<F2>
+
+  "search ((
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+map <CR> :nohl<CR>
+  "))
 "))
 
 "Setups norelativenumber only in insert mode and when normal mode use relativenumber instead ((
@@ -46,13 +54,6 @@ autocmd BufReadPost *
       \endif
 "))
 
-"General Setting for search ((
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-map <CR> :nohl<CR>
-"))
 
 "Yanking to clipboard
 map <leader>y "+yy
