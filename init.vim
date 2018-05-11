@@ -1,3 +1,4 @@
+"General customizations ((
 set guicursor=
 "set nocompatible
 set noerrorbells visualbell t_vb=
@@ -9,24 +10,26 @@ set list listchars=tab:▸•,trail:•
 set nocursorline
 
 imap jj <Esc>
+"imap <c-c> <Esc>
 cmap jj <c-c>
 vmap v <Esc>
 
 let g:mapleader=","
 
 set autowrite
-"set number
+set number
 set splitright
 set splitbelow
 set pastetoggle=<F2>
+"))
 
-"Setups for numbering ((
-set number relativenumber
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
+"Setups norelativenumber only in insert mode and when normal mode use relativenumber instead ((
+"set number relativenumber
+"augroup numbertoggle
+"  autocmd!
+"  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+"  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+"augroup END
 "))
 
 "Automatically source the Vimrc file on save ((
@@ -36,11 +39,23 @@ augroup autosourcing
 augroup END
 "))
 
+"Jump to last cursor position unless its invalid or in an event handler ((
+autocmd BufReadPost *
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \ exe "normal g`\"" |
+      \endif
+"))
+
+"General Setting for search ((
 set hlsearch
 set incsearch
 set ignorecase
 set smartcase
 map <CR> :nohl<CR>
+"))
+
+"Yanking to clipboard
+map <leader>y "+yy
 
 "Easy switch windows ((
 nnoremap <C-H> <C-W><C-H>
@@ -52,6 +67,19 @@ nnoremap <C-L> <C-W><C-L>
 "set undo directory backups ((
 set undofile
 set undodir=~/.config/vim/undodir
+"))
+
+"Renaming current file ((
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'))
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
+map <leader>n :call RenameFile()<cr>
 "))
 
 "vim-Plug Plugins manager ((
@@ -89,7 +117,7 @@ if exists('$TMUX')
 endif
 "))
 
-"fzf setups ((
+"fzf  fuzzy finders setups ((
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
@@ -113,9 +141,20 @@ let g:Powerline_symbols='unicode'
 let g:airline_theme='serene'
 "))
 
+"Status line customizations ((
+"function! GitInfo()
+"  let git = fugitive#head()
+"  if git != ''
+"    return ' '.fugitive#head()
+"  else
+"    return ''
+"endfunction
+"set statusline =%{GitInfo()}\ %<%f\ %-4(%m%)%=%-19(%3l,%02c%03V%)\ %{(&fenc!=''?&fenc:&enc)}\[%{&ff}]\ %3p%%\ %{&ft}\ 
+"))
+
 "NERDTree setups ((
 map <C-n> :NERDTreeToggle<cr>
-autocmd BufEnter NERD_* setlocal rnu!
+"autocmd BufEnter NERD_* setlocal rnu!
 "))
 
 "Emmet configuration ((
