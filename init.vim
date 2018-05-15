@@ -21,14 +21,6 @@ set number
 set splitright
 set splitbelow
 set pastetoggle=<F2>
-
-  "search ((
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-map <CR> :nohl<CR>
-  "))
 "))
 
 "Setups norelativenumber only in insert mode and when normal mode use relativenumber instead ((
@@ -54,6 +46,13 @@ autocmd BufReadPost *
       \endif
 "))
 
+"General Setting for search ((
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+map <CR> :nohl<CR>
+"))
 
 "Yanking to clipboard
 map <leader>y "+yy
@@ -130,7 +129,7 @@ map <C-P> :GFiles<CR>
 "))
 
 "set 4 tab for php file ((
-"autocmd Filetype php setlocal shiftwidth=4 tabstop=4
+autocmd Filetype php setlocal shiftwidth=4 tabstop=4
 "))
 
 "Airline Configuration ((
@@ -162,6 +161,10 @@ map <C-n> :NERDTreeToggle<cr>
 let g:user_emmet_settings = {
   \    'indentation' : '  '
   \}
+"))
+
+"Set autopairs only triggers on parenthesis, squarebraces, and curlybraces ((
+let g:AutoPairs = {'(':')', '[':']', '{':'}'}
 "))
 
 "Git Gutter custom ((
