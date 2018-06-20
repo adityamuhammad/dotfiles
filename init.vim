@@ -1,12 +1,14 @@
 "General customizations ((
 set guicursor=
-"set nocompatible
+set nocompatible
 set noerrorbells visualbell t_vb=
 set tabstop=2
 set expandtab
 set shiftwidth=2
+set laststatus=2
 set noshowmode
 set list listchars=tab:▸•,trail:•
+"set showtabline=2
 set nocursorline
 
 imap jj <Esc>
@@ -56,6 +58,7 @@ map <CR> :nohl<CR>
 
 "Yanking to clipboard
 map <leader>y "+yy
+imap <C-l> <%= %><left><left><left>
 
 "Easy switch windows ((
 nnoremap <C-H> <C-W><C-H>
@@ -86,13 +89,14 @@ map <leader>n :call RenameFile()<cr>
 call plug#begin('~/.config/vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'ervandew/supertab'
+Plug 'jgdavey/tslime.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mattn/emmet-vim'
-Plug 'qpkorr/vim-bufkill'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
@@ -133,23 +137,22 @@ autocmd Filetype php setlocal shiftwidth=4 tabstop=4
 "))
 
 "Airline Configuration ((
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#formatter = 'unique_tail'
-"let g:airline_section_c = '%t'
-let g:airline_powerline_fonts= 0
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:Powerline_symbols='unicode'
 let g:airline_theme='serene'
 "))
 
+set laststatus=2
 "Status line customizations ((
 "function! GitInfo()
 "  let git = fugitive#head()
 "  if git != ''
-"    return ' '.fugitive#head()
+"    return ' '.fugitive#head() . ' '
 "  else
 "    return ''
 "endfunction
-"set statusline =%{GitInfo()}\ %<%f\ %-4(%m%)%=%-19(%3l,%02c%03V%)\ %{(&fenc!=''?&fenc:&enc)}\[%{&ff}]\ %3p%%\ %{&ft}\ 
+"set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 "))
 
 "NERDTree setups ((
@@ -167,7 +170,16 @@ let g:user_emmet_settings = {
 let g:AutoPairs = {'(':')', '[':']', '{':'}'}
 "))
 
+" RSpec.vim mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+
+
 "Git Gutter custom ((
 let g:gitgutter_override_sign_column_highlight = 1
 set updatetime=100
 "))
+
